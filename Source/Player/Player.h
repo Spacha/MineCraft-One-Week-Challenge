@@ -16,7 +16,7 @@ class Player : public Entity {
   public:
     Player();
 
-    void handleInput(const sf::Window &window, Keyboard &keyboard);
+    void handleInput(const sf::RenderWindow &window, Keyboard &keyboard);
 
     void update(float dt, World &wolrd);
     void collide(World &world, const glm::vec3 &vel, float dt);
@@ -31,7 +31,7 @@ class Player : public Entity {
     void jump();
 
     void keyboardInput(Keyboard &keyboard);
-    void mouseInput(const sf::Window &window);
+    void mouseInput(const sf::RenderWindow &window);
     bool m_isOnGround = false;
     bool m_isFlying = false;
 

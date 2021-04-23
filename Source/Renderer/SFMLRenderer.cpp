@@ -8,9 +8,8 @@ void SFMLRenderer::add(const sf::Drawable &drawable)
     m_draws.push_back(&drawable);
 }
 
-void SFMLRenderer::render(sf::Window &window)
+void SFMLRenderer::render(sf::RenderWindow &window)
 {
-    /*
     if (m_draws.empty())
         return;
 
@@ -30,5 +29,5 @@ void SFMLRenderer::render(sf::Window &window)
     }
 
     window.popGLStates();
-    m_draws.clear();*/
+    m_draws.clear();
 }

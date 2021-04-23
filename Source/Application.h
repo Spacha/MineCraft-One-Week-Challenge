@@ -33,7 +33,7 @@ class Application {
         return m_camera;
     }
 
-    const sf::Window &getWindow() const
+    const sf::RenderWindow &getWindow() const
     {
         return m_context.window;
     }

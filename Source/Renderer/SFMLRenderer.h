@@ -8,7 +8,7 @@ class SFMLRenderer {
   public:
     void add(const sf::Drawable &drawable);
 
-    void render(sf::Window &window);
+    void render(sf::RenderWindow &window);
 
   private:
     std::vector<const sf::Drawable *> m_draws;

@@ -19,7 +19,7 @@ class RenderMaster {
     void drawChunk(const ChunkSection &chunk);
     void drawSky();
 
-    void finishRender(sf::Window &window, const Camera &camera);
+    void finishRender(sf::RenderWindow &window, const Camera &camera);
 
   private:
     // Chunks
@@ -29,7 +29,7 @@ class RenderMaster {
 
     // Detail
     SkyboxRenderer m_skyboxRenderer;
-    // SFMLRenderer    m_sfmlRenderer;
+    SFMLRenderer    m_sfmlRenderer;
 
     bool m_drawBox = false;
 };
