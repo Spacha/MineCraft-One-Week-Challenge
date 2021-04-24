@@ -14,7 +14,7 @@ class RenderMaster;
 
 class Player : public Entity {
   public:
-    Player();
+    Player(const sf::RenderWindow &window);
 
     void handleInput(const sf::RenderWindow &window, Keyboard &keyboard);
 
@@ -37,6 +37,8 @@ class Player : public Entity {
 
     std::vector<ItemStack> m_items;
     std::vector<sf::Text> m_itemText;
+    sf::Texture m_chTexture;
+    sf::Sprite m_crosshair;
     sf::Text m_posPrint;
     int m_heldItem = 0;
 

@@ -12,7 +12,7 @@
 
 sf::Font f;
 
-Player::Player()
+Player::Player(const sf::RenderWindow &window)
     : Entity({2500, 125, 2500}, {0.f, 0.f, 0.f}, {0.3f, 1.f, 0.3f})
     , m_itemDown(sf::Keyboard::Down)
     , m_itemUp(sf::Keyboard::Up)
@@ -43,6 +43,17 @@ Player::Player()
     m_posPrint.setOutlineColor(sf::Color::Black);
     m_posPrint.setCharacterSize(25);
     m_posPrint.setPosition(20.0f, 20.0f * 6.0f + 100.0f);
+
+    // Crosshair
+    if (!m_chTexture.loadFromFile("Res/Textures/ch.png")) {
+        throw std::runtime_error("Unable to open image: ch.png");
+    }
+
+    auto xPos = (window.getSize().x / 2) - (m_chTexture.getSize().x / 2);
+    auto yPos = (window.getSize().y / 2) - (m_chTexture.getSize().y / 2);
+
+    m_crosshair.setTexture(m_chTexture, true);
+    m_crosshair.setPosition(xPos, yPos);
 }
 
 void Player::addItem(const Material &material)
@@ -249,6 +260,7 @@ void Player::mouseInput(const sf::RenderWindow &window)
 
 void Player::draw(RenderMaster &master)
 {
+    // Draw inventory/toolbar
     for (unsigned i = 0; i < m_items.size(); i++) {
         sf::Text &t = m_itemText[i];
         if (i == (unsigned)m_heldItem) {
@@ -261,14 +273,18 @@ void Player::draw(RenderMaster &master)
                     std::to_string(m_items[i].getNumInStack()) + " ");
         master.drawSFML(t);
     }
+
+    // Draw player position info
     std::ostringstream stream;
     stream << " X: " << position.x << " Y: " << position.y
            << " Z: " << position.z << " Grounded " << std::boolalpha
            << m_isOnGround;
-
     m_posPrint.setString(stream.str());
-
+    
     master.drawSFML(m_posPrint);
+
+    // Draw crosshair
+    master.drawSFML(m_crosshair);
 }
 
 void Player::jump()
